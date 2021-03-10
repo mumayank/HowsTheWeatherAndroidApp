@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -48,4 +51,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
+    // coordinator layout
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+
+    // preferences
+    implementation 'androidx.preference:preference-ktx:1.1.1'
 }
