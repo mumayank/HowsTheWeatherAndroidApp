@@ -1,4 +1,4 @@
-package com.mumayank.howstheweather.main.bookmarks
+package com.mumayank.howstheweather.main.famous_cities
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,38 +9,32 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mumayank.howstheweather.R
 import com.mumayank.howstheweather.db.City
+import com.mumayank.howstheweather.main.details.data.CityWithCode
 
 class RvAdapter(
-    private val cities: List<City>,
-    private val onClick: ((city: City) -> Unit)?,
-    private val onRemove: ((city: City) -> Unit)?
+    private val cities: List<CityWithCode>,
+    private val onClick: ((cityWithCode: CityWithCode) -> Unit)?
 ) :
     RecyclerView.Adapter<RvAdapter.ViewHolder>() {
 
     class ViewHolder(
         itemView: View,
-        private val onClick: ((city: City) -> Unit)?,
-        private val onRemove: ((city: City) -> Unit)?
+        private val onClick: ((cityWithCode: CityWithCode) -> Unit)?
     ) : RecyclerView.ViewHolder(itemView) {
-        fun bindItems(city: City) {
-            val imageViewRemoveItem =
-                itemView.findViewById(R.id.image_view_remove_item) as ImageView
+        fun bindItems(cityWithCode: CityWithCode) {
             val clickableLayout = itemView.findViewById(R.id.clickable_layout) as LinearLayout
             val textViewName = itemView.findViewById(R.id.text_view_name) as TextView
-            imageViewRemoveItem.setOnClickListener {
-                onRemove?.invoke(city)
-            }
             clickableLayout.setOnClickListener {
-                onClick?.invoke(city)
+                onClick?.invoke(cityWithCode)
             }
-            textViewName.text = city.name
+            textViewName.text = cityWithCode.name
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_rv_item_bookmarks, parent, false)
-        return ViewHolder(v, onClick, onRemove)
+            .inflate(R.layout.layout_rv_item_famous_cities, parent, false)
+        return ViewHolder(v, onClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -16,6 +16,7 @@ class DetailsActivity : AppCompatActivity() {
         const val IE_CITY_LAT = "IE_CITY_LAT"
         const val IE_CITY_LON = "IE_CITY_LON"
         const val IE_CITY_NAME = "IE_CITY_NAME"
+        const val IE_CITY_ID = "IE_CITY_ID"
     }
 
     private lateinit var binding: ActivityDetailsBinding
@@ -29,10 +30,16 @@ class DetailsActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.getData(
-            intent.getDoubleExtra(IE_CITY_LAT, 0.0),
-            intent.getDoubleExtra(IE_CITY_LON, 0.0)
-        )
+        val lat = intent.getDoubleExtra(IE_CITY_LAT, -1.0)
+        val lon = intent.getDoubleExtra(IE_CITY_LON, -1.0)
+        val id = intent.getLongExtra(IE_CITY_ID, -1L)
+
+        if (id != -1L) {
+            viewModel.getData(id)
+        } else {
+            viewModel.getData(lat, lon)
+        }
+
         viewModel.multiDayForecast.observe(this) {
             if (it == null) {
                 return@observe
@@ -44,7 +51,8 @@ class DetailsActivity : AppCompatActivity() {
             binding.recyclerView.adapter = RvAdapter(it.list, isMetricUnitSystem)
         }
         viewModel.isInProgress.observe(this) {
-            binding.progressViewLayout.progressLayout.visibility = if (it) View.VISIBLE else View.GONE
+            binding.progressViewLayout.progressLayout.visibility =
+                if (it) View.VISIBLE else View.GONE
         }
     }
 

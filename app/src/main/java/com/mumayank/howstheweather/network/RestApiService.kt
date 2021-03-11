@@ -19,4 +19,10 @@ interface RestApiService {
         @Query("lon") longitude: Double,
         @Query("units") units: String
     ): Response<MultiDayForecast>
+
+    @GET("/data/2.5/forecast")
+    suspend fun getMutidayForecastWithId(
+        @Query("id") id: Long,
+        @Query("units") units: String
+    ): Response<MultiDayForecast>
 }

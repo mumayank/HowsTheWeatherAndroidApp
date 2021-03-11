@@ -37,6 +37,33 @@ class DetailsViewModel(application: Application): AndroidViewModel(application) 
             val apiInterface = RetrofitFactory.getClient().create(RestApiService::class.java)
             val result = apiInterface.getMutidayForecast(latitude, longitude, units)
             val response = result.body()!!
+            filterData(response)
+        }
+    }
+
+    fun getData(cityId: Long) {
+        if (multiDayForecast.value != null) {
+            return
+        }
+        isInProgress.postValue(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication())
+            val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
+            val units = if (isMetricUnitSystem) {
+                "metric"
+            } else {
+                "imperial"
+            }
+
+            val apiInterface = RetrofitFactory.getClient().create(RestApiService::class.java)
+            val result = apiInterface.getMutidayForecastWithId(cityId, units)
+            val response = result.body()!!
+            filterData(response)
+        }
+    }
+
+    private fun filterData(response: MultiDayForecast) {
+        viewModelScope.launch(Dispatchers.IO) {
             val filteredResponse = arrayListOf<Lists>()
             for (i in response.list) {
                 if (i.dt_txt.endsWith("00:00:00")) {
