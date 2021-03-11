@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bookmarks"
+        android:icon="@drawable/ic_baseline_bookmarks_24"
+        android:title="@string/bookmarks" />
+    <item
+        android:id="@+id/known_cities"
+        android:icon="@drawable/ic_baseline_location_city_24"
+        android:title="@string/famous_cities" />
+    <item
+        android:id="@+id/maps"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:title="@string/map" />
+</menu>

@@ -1,21 +1,18 @@
 package com.mumayank.howstheweather.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.lifecycle.lifecycleScope
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.mumayank.howstheweather.help.HelpActivity
 import com.mumayank.howstheweather.R
-import com.mumayank.howstheweather.settings.SettingsActivity
 import com.mumayank.howstheweather.databinding.ActivityMainBinding
+import com.mumayank.howstheweather.help.HelpActivity
+import com.mumayank.howstheweather.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigationIfApplicable() {
         if (binding.drawerLayout != null) {
-            val toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar,
+            val toggle = ActionBarDrawerToggle(
+                this, binding.drawerLayout, binding.toolbar,
                 R.string.app_name,
                 R.string.app_name
             )
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_toolbar_menu, menu)
+        menuInflater.inflate(R.menu.menu_toolbar_main, menu)
         return true
     }
 

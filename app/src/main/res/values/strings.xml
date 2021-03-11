@@ -1,26 +1,31 @@
 <resources>
     <string name="app_name">How\'s The Weather</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bookmarks">Bookmarks</string>
-    <string name="known_cities">Famous Cities</string>
+    <string name="famous_cities">Famous Cities</string>
     <string name="map">Map</string>
     <string name="settings">Settings</string>
-    <string name="help">help</string>
+    <string name="help">Help</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="today_forecast">Today\'s Forecast</string>
-    <string name="multi_day_forecast">5 day\'s forecast</string>
+    <string name="metric_unit_system_off">Show units in imperial system</string>
+    <string name="metric_unit_system_on">Show units in metric system</string>
+    <string name="metric_unit_system">Metric unit system</string>
+    <string name="reset_bookmarks">Reset bookmarks</string>
+    <string name="empty_view_bookmarks_text">Your bookmarks will appear here\nHead to Maps section to add bookmarks!</string>
+    <string name="search">Search</string>
+    <string name="bookmark_help">Please select a city from the map to bookmark it</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="app_logo">App logo</string>
+    <string name="right_icon">right icon</string>
+    <string name="remove_this_bookmark">remove this bookmark</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="rain_chances">Rain chances</string>
+    <string name="wind_information">Wind information</string>
+    <string name="city_bookmarked">City bookmarked!</string>
+    <string name="could_not_detect_city">Could not detect a city in this region.\n(Hint: change zoom and try again)</string>
+    <string name="bookmarks_are_reset">Bookmarks are reset</string>
+    <string name="google_play_services_issue">Google Play Services Issue</string>
+    <string name="google_play_service_issue_detail">This app depends on Google Maps to show maps. Google Maps requires Google Play Services. Unfortunately, there is some issue with the said services present on this phone. Please either install or update the said services or try again from another phone. Really sorry for the inconvenience!</string>
+    <string name="exit">EXIT</string>
 </resources>

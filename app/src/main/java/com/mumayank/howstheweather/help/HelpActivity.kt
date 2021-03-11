@@ -1,12 +1,11 @@
 package com.mumayank.howstheweather.help
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 import com.mumayank.howstheweather.databinding.ActivityHelpBinding
 
 class HelpActivity : AppCompatActivity() {
@@ -19,7 +18,7 @@ class HelpActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.webView.webViewClient = object: WebViewClient() {
+        binding.webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 binding.progressHolderLayout.progressLayout.visibility = View.GONE

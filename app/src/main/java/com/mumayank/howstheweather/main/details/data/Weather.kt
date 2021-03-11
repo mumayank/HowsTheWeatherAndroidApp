@@ -1,6 +1,7 @@
 package com.mumayank.howstheweather.main.details.data
 
 import com.google.gson.annotations.SerializedName
+
 /*
 Copyright (c) 2021 Kotlin Data Classes Generated from JSON powered by http://www.json2kotlin.com
 
@@ -13,10 +14,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class Weather (
+data class Weather(
 
-	@SerializedName("id") val id : Int,
-	@SerializedName("main") val main : String,
-	@SerializedName("description") val description : String,
-	@SerializedName("icon") val icon : String
+	@SerializedName("id") val id: Int,
+	@SerializedName("main") val main: String,
+	@SerializedName("description") val description: String,
+	@SerializedName("icon") val icon: String
 )

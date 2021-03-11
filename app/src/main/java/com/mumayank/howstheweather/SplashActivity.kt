@@ -7,17 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mumayank.howstheweather.helpers.GooglePlayServicesHelper
 import com.mumayank.howstheweather.main.MainActivity
 
-class SplashActivity: AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
     private lateinit var googlePlayServicesHelper: GooglePlayServicesHelper
 
     companion object {
         private fun closeAppWithAlert(activity: AppCompatActivity) {
             AlertDialog.Builder(activity)
-                .setTitle("Google Play Services Issue")
-                .setMessage("This app depends on Google Maps to show maps. Google Maps requires Google Play Services. Unfortunately, there is some issue with the said services present on this phone. Please either install or update the said services or try again from another phone. Really sorry for the inconvenience!")
+                .setTitle(activity.getString(R.string.google_play_services_issue))
+                .setMessage(activity.getString(R.string.google_play_service_issue_detail))
                 .setCancelable(false)
-                .setPositiveButton("EXIT") { _, _ ->
+                .setPositiveButton(activity.getString(R.string.exit)) { _, _ ->
                     activity.onBackPressed()
                 }
         }

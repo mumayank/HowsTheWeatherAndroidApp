@@ -1,52 +1,48 @@
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:paddingBottom="32dp">
 
-    <TextView android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="13 Mar 2021, 05:00:00"
+        android:gravity="center"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold"
-        android:gravity="center"
-        android:id="@+id/text_view_title"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        tools:text="13 Mar 2021, 05:00:00" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:gravity="start|center"
+                android:text="@string/temperature"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|center"
-                    android:text="Temperature"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/text_view_temperature"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|center"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    tools:text="15.6 degrees" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/text_view_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:text="15.6 degrees" />
 
         </LinearLayout>
 
@@ -54,30 +50,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:gravity="end|center"
+                android:text="@string/humidity"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end|center"
-                    android:text="Humidity"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/text_view_humidity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end|center"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    tools:text="15.6 degrees" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/text_view_humidity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end|center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:text="15.6 degrees" />
 
         </LinearLayout>
 
@@ -85,38 +74,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="16dp">
+                android:gravity="start|center"
+                android:text="@string/rain_chances"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|center"
-                    android:text="Rain chances"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/text_view_rain_chances"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|center"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    tools:text="15.6 degrees" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/text_view_rain_chances"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:text="15.6 degrees" />
 
         </LinearLayout>
 
@@ -124,39 +107,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="16dp">
+                android:gravity="end|center"
+                android:text="@string/wind_information"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end|center"
-                    android:text="Wind information"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/text_view_wind_information"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end|center"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    tools:text="15.6 degrees" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/text_view_wind_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end|center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                tools:text="15.6 degrees" />
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="32dp" />
 
 </LinearLayout>

@@ -7,7 +7,7 @@ import com.mumayank.howstheweather.db.Db
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SettingsViewModel(application: Application): AndroidViewModel(application) {
+class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
     fun resetPrefs() {
         viewModelScope.launch(Dispatchers.IO) {

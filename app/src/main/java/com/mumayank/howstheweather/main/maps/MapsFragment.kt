@@ -1,10 +1,10 @@
 package com.mumayank.howstheweather.main.maps
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -42,7 +42,6 @@ class MapsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).getMapAsync {
             googleMap = it
-            googleMap?.setPadding(100, 100, 100, 100)
             googleMap?.uiSettings?.isMapToolbarEnabled = false
             googleMap?.uiSettings?.isZoomControlsEnabled = true
             googleMap?.setOnMapClickListener { latLng ->
@@ -61,7 +60,7 @@ class MapsFragment : Fragment() {
             marker = null
             Snackbar.make(
                 binding.coordinatorLayout,
-                "City bookmarked!",
+                getString(R.string.city_bookmarked),
                 Snackbar.LENGTH_LONG
             ).show()
         }
@@ -73,7 +72,7 @@ class MapsFragment : Fragment() {
             if (it == null) {
                 Snackbar.make(
                     binding.coordinatorLayout,
-                    "Could not detect a city in this region.\n(Hint: change zoom and try again)",
+                    "@string/could_not_detect_city",
                     Snackbar.LENGTH_LONG
                 ).show()
             } else {
@@ -82,7 +81,8 @@ class MapsFragment : Fragment() {
         }
 
         viewModel.isInProgress.observe(viewLifecycleOwner) {
-            binding.progressHolderLayout.progressLayout.visibility = if (it) View.VISIBLE else View.GONE
+            binding.progressHolderLayout.progressLayout.visibility =
+                if (it) View.VISIBLE else View.GONE
         }
     }
 

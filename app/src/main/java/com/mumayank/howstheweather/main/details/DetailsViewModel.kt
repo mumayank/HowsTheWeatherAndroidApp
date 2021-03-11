@@ -12,7 +12,21 @@ import com.mumayank.howstheweather.network.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(application: Application): AndroidViewModel(application) {
+class DetailsViewModel(application: Application) : AndroidViewModel(application) {
+
+    companion object {
+        fun getUnit(application: Application): String {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
+            val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
+            return if (isMetricUnitSystem) {
+                "metric"
+            } else {
+                "imperial"
+            }
+        }
+
+        const val filterTimeEndWith = "00:00:00"
+    }
 
     val multiDayForecast: MutableLiveData<MultiDayForecast> by lazy {
         MutableLiveData<MultiDayForecast>(null)
@@ -26,16 +40,8 @@ class DetailsViewModel(application: Application): AndroidViewModel(application) 
         }
         isInProgress.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication())
-            val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
-            val units = if (isMetricUnitSystem) {
-                "metric"
-            } else {
-                "imperial"
-            }
-
             val apiInterface = RetrofitFactory.getClient().create(RestApiService::class.java)
-            val result = apiInterface.getMutidayForecast(latitude, longitude, units)
+            val result = apiInterface.getMutidayForecast(latitude, longitude, getUnit(getApplication()))
             val response = result.body()!!
             filterData(response)
         }
@@ -47,16 +53,8 @@ class DetailsViewModel(application: Application): AndroidViewModel(application) 
         }
         isInProgress.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication())
-            val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
-            val units = if (isMetricUnitSystem) {
-                "metric"
-            } else {
-                "imperial"
-            }
-
             val apiInterface = RetrofitFactory.getClient().create(RestApiService::class.java)
-            val result = apiInterface.getMutidayForecastWithId(cityId, units)
+            val result = apiInterface.getMutidayForecastWithId(cityId, getUnit(getApplication()))
             val response = result.body()!!
             filterData(response)
         }
@@ -66,7 +64,7 @@ class DetailsViewModel(application: Application): AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO) {
             val filteredResponse = arrayListOf<Lists>()
             for (i in response.list) {
-                if (i.dt_txt.endsWith("00:00:00")) {
+                if (i.dt_txt.endsWith(filterTimeEndWith)) {
                     filteredResponse.add(i)
                 }
             }

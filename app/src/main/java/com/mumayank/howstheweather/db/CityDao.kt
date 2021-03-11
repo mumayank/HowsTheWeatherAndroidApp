@@ -8,8 +8,10 @@ interface CityDao {
     @Query("SELECT * FROM city")
     fun getAll(): Flow<List<City>>
 
-    @Query("SELECT * FROM city WHERE lat LIKE :latitude AND " +
-            "lon LIKE :longitude LIMIT 1")
+    @Query(
+        "SELECT * FROM city WHERE lat LIKE :latitude AND " +
+                "lon LIKE :longitude LIMIT 1"
+    )
     suspend fun findByLatLon(latitude: Double, longitude: Double): City
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

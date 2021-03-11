@@ -2,7 +2,6 @@ package com.mumayank.howstheweather.db
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
 
 object Db {
     private lateinit var db: AppDatabase

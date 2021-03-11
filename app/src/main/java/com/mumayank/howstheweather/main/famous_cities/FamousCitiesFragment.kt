@@ -4,18 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mumayank.howstheweather.main.MainViewModel
 import com.mumayank.howstheweather.databinding.FragmentKnownCitiesBinding
-import com.mumayank.howstheweather.db.City
-import com.mumayank.howstheweather.main.bookmarks.RvAdapter
+import com.mumayank.howstheweather.main.MainViewModel
 import com.mumayank.howstheweather.main.details.DetailsActivity
 import com.mumayank.howstheweather.main.details.data.CityWithCode
 
@@ -53,7 +50,7 @@ class FamousCitiesFragment : Fragment() {
             binding.progressLayout.progressLayout.visibility = if (it) View.VISIBLE else View.GONE
         }
 
-        binding.editTextSearch.addTextChangedListener(object: TextWatcher {
+        binding.editTextSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
             }
@@ -74,7 +71,7 @@ class FamousCitiesFragment : Fragment() {
                 activity,
                 DetailsActivity::class.java
             ).putExtra(DetailsActivity.IE_CITY_NAME, cityWithCode.name)
-            .putExtra(DetailsActivity.IE_CITY_ID, cityWithCode.code)
+                .putExtra(DetailsActivity.IE_CITY_ID, cityWithCode.code)
         )
     }
 

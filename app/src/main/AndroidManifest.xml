@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HowsTheWeatherAndroidApp">
-        <activity android:name=".main.details.DetailsActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -26,10 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.details.DetailsActivity" />
         <activity android:name=".help.HelpActivity" />
-        <activity
-            android:name=".settings.SettingsActivity"
-            android:label="@string/title_activity_settings" />
+        <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".main.MainActivity" />
 
         <meta-data

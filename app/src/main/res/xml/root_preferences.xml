@@ -3,14 +3,14 @@
     <PreferenceCategory>
 
         <SwitchPreferenceCompat
-            app:key="isMetricUnitSystem"
-            app:summaryOff="Show units in imperial system"
-            app:summaryOn="Show units in metric system"
-            app:title="Metric unit system" />
+            app:key="is_metric_unit_system"
+            app:summaryOff="@string/metric_unit_system_off"
+            app:summaryOn="@string/metric_unit_system_on"
+            app:title="@string/metric_unit_system" />
 
         <Preference
             app:key="resetBookmarks"
-            app:title="Reset bookmarks" />
+            app:title="@string/reset_bookmarks" />
 
     </PreferenceCategory>
 

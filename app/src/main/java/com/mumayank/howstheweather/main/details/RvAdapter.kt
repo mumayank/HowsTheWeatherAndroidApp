@@ -12,7 +12,7 @@ import com.mumayank.howstheweather.main.details.data.MetricUnits
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RvAdapter (private val lists: List<Lists>, private val isMetricUnitSystem: Boolean) :
+class RvAdapter(private val lists: List<Lists>, private val isMetricUnitSystem: Boolean) :
     RecyclerView.Adapter<RvAdapter.ViewHolder>() {
 
     companion object {
