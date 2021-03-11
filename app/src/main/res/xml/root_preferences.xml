@@ -3,7 +3,7 @@
     <PreferenceCategory>
 
         <SwitchPreferenceCompat
-            app:key="metricUnitSystem"
+            app:key="isMetricUnitSystem"
             app:summaryOff="Show units in imperial system"
             app:summaryOn="Show units in metric system"
             app:title="Metric unit system" />

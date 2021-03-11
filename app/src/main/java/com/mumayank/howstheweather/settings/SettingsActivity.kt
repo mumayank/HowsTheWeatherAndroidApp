@@ -2,8 +2,13 @@ package com.mumayank.howstheweather.settings
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.google.android.material.snackbar.Snackbar
 import com.mumayank.howstheweather.R
 import com.mumayank.howstheweather.databinding.SettingsActivityBinding
 
@@ -35,6 +40,14 @@ class SettingsActivity : AppCompatActivity() {
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
+            val resetBookmarksPreference: Preference? = findPreference("resetBookmarks")
+            resetBookmarksPreference?.setOnPreferenceClickListener {
+                val viewModel: SettingsViewModel by viewModels()
+                viewModel.resetPrefs()
+                Toast.makeText(this.context, "Bookmarks are reset", Toast.LENGTH_SHORT).show()
+                true
+            }
+
         }
     }
 }
