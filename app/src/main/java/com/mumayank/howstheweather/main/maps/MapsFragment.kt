@@ -1,13 +1,10 @@
-package com.mumayank.howstheweather.maps
+package com.mumayank.howstheweather.main.maps
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -47,15 +44,29 @@ class MapsFragment : Fragment() {
             googleMap = it
             googleMap?.setPadding(100, 100, 100, 100)
             googleMap?.uiSettings?.isMapToolbarEnabled = false
+            googleMap?.uiSettings?.isZoomControlsEnabled = true
             googleMap?.setOnMapClickListener { latLng ->
                 viewModel.getCityName(latLng)
             }
-            if (viewModel.currentCity.value != null) {
-                updateCityUi(viewModel.currentCity.value!!)
+            if (viewModel.currentMapCity.value != null) {
+                updateCityUi(viewModel.currentMapCity.value!!)
             }
         }
 
-        viewModel.currentCity.observe(viewLifecycleOwner) {
+        binding.buttonBookmark.setOnClickListener {
+            viewModel.bookmarkCity()
+            binding.linearLayoutCitySelected.visibility = View.GONE
+            binding.textViewSelectACity.visibility = View.VISIBLE
+            marker!!.remove()
+            marker = null
+            Snackbar.make(
+                binding.coordinatorLayout,
+                "City bookmarked!",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+
+        viewModel.currentMapCity.observe(viewLifecycleOwner) {
             if (googleMap == null) {
                 return@observe
             }
@@ -75,16 +86,16 @@ class MapsFragment : Fragment() {
         }
     }
 
-    private fun updateCityUi(city: City) {
+    private fun updateCityUi(mapCity: MapCity) {
         if (marker == null) {
-            marker = googleMap?.addMarker(MarkerOptions().position(city.latLng))
+            marker = googleMap?.addMarker(MarkerOptions().position(mapCity.latLng))
             binding.textViewSelectACity.visibility = View.GONE
             binding.linearLayoutCitySelected.visibility = View.VISIBLE
         }
-        marker?.position = city.latLng
-        marker?.title = city.name
-        binding.textViewSelectedCity.text = city.name
-        googleMap?.animateCamera(CameraUpdateFactory.newLatLng(city.latLng))
+        marker?.position = mapCity.latLng
+        marker?.title = mapCity.name
+        binding.textViewSelectedCity.text = mapCity.name
+        googleMap?.animateCamera(CameraUpdateFactory.newLatLng(mapCity.latLng))
     }
 
     override fun onDestroyView() {

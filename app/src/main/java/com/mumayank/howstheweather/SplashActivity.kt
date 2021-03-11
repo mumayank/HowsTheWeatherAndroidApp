@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.mumayank.howstheweather.helpers.GooglePlayServicesHelper
-import java.util.*
+import com.mumayank.howstheweather.main.MainActivity
 
 class SplashActivity: AppCompatActivity() {
 

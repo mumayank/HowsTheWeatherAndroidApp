@@ -1,10 +1,10 @@
-package com.mumayank.howstheweather
+package com.mumayank.howstheweather.settings
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NavUtils
 import androidx.preference.PreferenceFragmentCompat
+import com.mumayank.howstheweather.R
 import com.mumayank.howstheweather.databinding.SettingsActivityBinding
 
 class SettingsActivity : AppCompatActivity() {
