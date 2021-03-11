@@ -6,6 +6,8 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mumayank.howstheweather.databinding.ActivityDetailsBinding
 
 class DetailsActivity : AppCompatActivity() {
@@ -31,18 +33,15 @@ class DetailsActivity : AppCompatActivity() {
             intent.getDoubleExtra(IE_CITY_LAT, 0.0),
             intent.getDoubleExtra(IE_CITY_LON, 0.0)
         )
-        viewModel.singleDayForecastResponse.observe(this) {
+        viewModel.multiDayForecast.observe(this) {
             if (it == null) {
                 return@observe
             }
-
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication())
             val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
-
-            binding.textViewTemperature.text = it.main.temp.toString() + " " + if (isMetricUnitSystem) MetricUnits.temperatureUnit else ImperialUnits.temperatureUnit
-            binding.textViewHumidity.text = it.main.humidity.toString() + "%"
-            binding.textViewRainChances.text = it.weather[0].main
-            binding.textViewWindInformation.text = it.wind.speed.toString() + " " + if (isMetricUnitSystem) MetricUnits.windSpeed else ImperialUnits.windSpeed
+            binding.recyclerView.layoutManager =
+                LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+            binding.recyclerView.adapter = RvAdapter(it.list, isMetricUnitSystem)
         }
         viewModel.isInProgress.observe(this) {
             binding.progressViewLayout.progressLayout.visibility = if (it) View.VISIBLE else View.GONE
