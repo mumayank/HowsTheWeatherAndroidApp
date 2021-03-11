@@ -1,7 +1,6 @@
-package com.mumayank.howstheweather.main.bookmarks.data
+package com.mumayank.howstheweather.main.details.data
 
 import com.google.gson.annotations.SerializedName
-
 /*
 Copyright (c) 2021 Kotlin Data Classes Generated from JSON powered by http://www.json2kotlin.com
 
@@ -14,8 +13,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class Wind (
+data class Lists (
 
-	@SerializedName("speed") val speed : Double,
-	@SerializedName("deg") val deg : Double
+	@SerializedName("main") val main : Main,
+	@SerializedName("weather") val weather : List<Weather>,
+	@SerializedName("clouds") val clouds : Clouds,
+	@SerializedName("wind") val wind : Wind,
+	@SerializedName("visibility") val visibility : Int,
+	@SerializedName("pop") val pop : Double,
+	@SerializedName("sys") val sys : Sys,
+	@SerializedName("dt_txt") val dt_txt : String
 )
