@@ -20,7 +20,6 @@ import com.mumayank.howstheweather.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +28,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         setupNavigationIfApplicable()
         setupBottomNavigationIfApplicable()
-        if (viewModel.singleDayForecastResponse.value == null) {
-            viewModel.getData()
-        }
-        viewModel.singleDayForecastResponse.observe(this) {
-            Log.e("", "")
-        }
     }
 
     private fun setupNavigationIfApplicable() {
