@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/bookmarks"
-        android:name="com.mumayank.howstheweather.BookmarksFragment"
+        android:name="com.mumayank.howstheweather.main.bookmarks.BookmarksFragment"
         android:label="fragment_bookmarks"
         tools:layout="@layout/fragment_bookmarks">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/known_cities"
-        android:name="com.mumayank.howstheweather.KnownCitiesFragment"
+        android:name="com.mumayank.howstheweather.main.knowncities.KnownCitiesFragment"
         android:label="fragment_known_cities"
         tools:layout="@layout/fragment_known_cities">
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/maps"
-        android:name="com.mumayank.howstheweather.maps.MapsFragment"
+        android:name="com.mumayank.howstheweather.main.maps.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
 
