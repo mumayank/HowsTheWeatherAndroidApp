@@ -1,4 +1,4 @@
-package com.mumayank.howstheweather.maps
+package com.mumayank.howstheweather.main.maps
 
 import android.app.Application
 import android.location.Geocoder
@@ -6,15 +6,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
+import com.mumayank.howstheweather.db.City
+import com.mumayank.howstheweather.db.Db
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 
-class MapsViewModel(application: Application): AndroidViewModel(application) {
+class MapsViewModel(application: Application) : AndroidViewModel(application) {
 
-    val currentCity: MutableLiveData<City?> by lazy {
-        MutableLiveData<City?>()
+    val currentMapCity: MutableLiveData<MapCity?> by lazy {
+        MutableLiveData<MapCity?>()
     }
 
     val isInProgress = MutableLiveData(false)
@@ -39,15 +40,27 @@ class MapsViewModel(application: Application): AndroidViewModel(application) {
 
     private suspend fun setCityNameSearchFailedResult() {
         viewModelScope.launch(Dispatchers.Main) {
-            currentCity.postValue(null)
+            currentMapCity.postValue(null)
             isInProgress.postValue(false)
         }
     }
 
     private suspend fun setCityNameSearchSuccessResult(cityName: String, latLng: LatLng) {
         viewModelScope.launch(Dispatchers.Main) {
-            currentCity.postValue(City(cityName, latLng))
+            currentMapCity.postValue(MapCity(cityName, latLng))
             isInProgress.postValue(false)
+        }
+    }
+
+    fun bookmarkCity() {
+        viewModelScope.launch(Dispatchers.IO) {
+            Db.getDb(getApplication()).cityDao().insertAll(
+                City(
+                    currentMapCity.value!!.name,
+                    currentMapCity.value!!.latLng.latitude,
+                    currentMapCity.value!!.latLng.longitude
+                )
+            )
         }
     }
 
