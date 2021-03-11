@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/maps"
-        android:name="com.mumayank.howstheweather.MapsFragment"
+        android:name="com.mumayank.howstheweather.maps.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
 
