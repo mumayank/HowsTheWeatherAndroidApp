@@ -63,7 +63,7 @@ class MapsFragment : Fragment() {
                 Snackbar.make(
                     binding.coordinatorLayout,
                     "Could not detect a city in this region.\n(Hint: change zoom and try again)",
-                    Snackbar.LENGTH_INDEFINITE
+                    Snackbar.LENGTH_LONG
                 ).show()
             } else {
                 updateCityUi(it)
