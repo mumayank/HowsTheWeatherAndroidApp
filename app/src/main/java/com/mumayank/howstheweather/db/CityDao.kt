@@ -17,4 +17,7 @@ interface CityDao {
 
     @Delete
     suspend fun delete(city: City)
+
+    @Query("DELETE FROM city")
+    suspend fun deleteAll()
 }
