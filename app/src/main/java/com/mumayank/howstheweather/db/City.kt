@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-@Entity(primaryKeys = ["lat", "lon"])
+@Entity(primaryKeys = ["name"])
 data class City(
     val name: String,
     val lat: Double,
