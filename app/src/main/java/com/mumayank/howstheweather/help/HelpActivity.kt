@@ -1,4 +1,4 @@
-package com.mumayank.howstheweather
+package com.mumayank.howstheweather.help
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
