@@ -9,7 +9,8 @@ interface RestApiService {
     @GET("/data/2.5/weather")
     suspend fun getTodaysForecast(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double
+        @Query("lon") longitude: Double,
+        @Query("units") units: String
     ): Response<SingleDayForecastResponse>
 
     /*@GET("/data/2.5/forecast")
