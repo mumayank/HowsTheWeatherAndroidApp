@@ -59,6 +59,7 @@ class BookmarksFragment : Fragment() {
                 DetailsActivity::class.java
             ).putExtra(DetailsActivity.IE_CITY_LAT, city.lat)
                 .putExtra(DetailsActivity.IE_CITY_LON, city.lon)
+                .putExtra(DetailsActivity.IE_CITY_NAME, city.name)
         )
     }
 

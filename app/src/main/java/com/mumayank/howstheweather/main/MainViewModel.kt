@@ -19,7 +19,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun getData() {
         viewModelScope.launch {
             val apiInterface = RetrofitFactory.getClient().create(RestApiService::class.java)
-            val result = apiInterface.getTodaysForcast(35.0, 139.0)
+            val result = apiInterface.getTodaysForecast(35.0, 139.0)
             singleDayForecastResponse.postValue(result.body())
         }
     }
