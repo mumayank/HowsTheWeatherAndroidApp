@@ -6,7 +6,6 @@ import androidx.room.Room
 import com.mumayank.howstheweather.db.AppDatabase
 import com.mumayank.howstheweather.db.City
 import com.mumayank.howstheweather.db.Db
-import com.mumayank.howstheweather.main.bookmarks.data.SingleDayForecastResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
