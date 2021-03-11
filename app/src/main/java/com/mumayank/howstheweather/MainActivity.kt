@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.mumayank.howstheweather.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,16 +21,30 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        setupNavigation()
+        setupNavigationIfApplicable()
+        setupBottomNavigationIfApplicable()
     }
 
-    private fun setupNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        NavigationUI.setupWithNavController(
-            binding.bottomNavigationView,
-            navHostFragment.navController
-        )
+    private fun setupNavigationIfApplicable() {
+        if (binding.drawerLayout != null) {
+            val toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.app_name, R.string.app_name)
+            binding.drawerLayout!!.addDrawerListener(toggle)
+            toggle.syncState()
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            binding.navView!!.setupWithNavController(navHostFragment.navController)
+        }
+    }
+
+    private fun setupBottomNavigationIfApplicable() {
+        if (binding.bottomNavigationView != null) {
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            NavigationUI.setupWithNavController(
+                binding.bottomNavigationView!!,
+                navHostFragment.navController
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
