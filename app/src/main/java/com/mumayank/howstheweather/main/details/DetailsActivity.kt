@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.mumayank.howstheweather.databinding.ActivityDetailsBinding
 
 class DetailsActivity : AppCompatActivity() {
@@ -34,10 +35,14 @@ class DetailsActivity : AppCompatActivity() {
             if (it == null) {
                 return@observe
             }
-            binding.textViewTemperature.text = it.main.temp.toString()
-            binding.textViewHumidity.text = it.main.humidity.toString()
+
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication())
+            val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
+
+            binding.textViewTemperature.text = it.main.temp.toString() + " " + if (isMetricUnitSystem) MetricUnits.temperatureUnit else ImperialUnits.temperatureUnit
+            binding.textViewHumidity.text = it.main.humidity.toString() + "%"
             binding.textViewRainChances.text = it.weather[0].main
-            binding.textViewWindInformation.text = it.wind.speed.toString() + " " + it.wind.deg.toString()
+            binding.textViewWindInformation.text = it.wind.speed.toString() + " " + if (isMetricUnitSystem) MetricUnits.windSpeed else ImperialUnits.windSpeed
         }
         viewModel.isInProgress.observe(this) {
             binding.progressViewLayout.progressLayout.visibility = if (it) View.VISIBLE else View.GONE
