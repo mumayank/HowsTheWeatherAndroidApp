@@ -6,7 +6,9 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import com.mumayank.howstheweather.R
 import com.mumayank.howstheweather.databinding.ActivityHelpBinding
+import com.mumayank.howstheweather.main.details.DetailsActivity
 
 class HelpActivity : AppCompatActivity() {
 
@@ -17,6 +19,7 @@ class HelpActivity : AppCompatActivity() {
         binding = ActivityHelpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+        binding.toolbar.title = getString(R.string.help)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {

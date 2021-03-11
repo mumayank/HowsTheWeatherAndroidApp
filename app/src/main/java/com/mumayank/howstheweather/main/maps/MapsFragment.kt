@@ -72,7 +72,7 @@ class MapsFragment : Fragment() {
             if (it == null) {
                 Snackbar.make(
                     binding.coordinatorLayout,
-                    "@string/could_not_detect_city",
+                    getString(R.string.could_not_detect_city),
                     Snackbar.LENGTH_LONG
                 ).show()
             } else {
