@@ -31,7 +31,7 @@
 
         <include
             android:id="@+id/progress_holder_layout"
-            layout="@layout/progress_view_layout" />
+            layout="@layout/layout_progress" />
 
     </FrameLayout>
 

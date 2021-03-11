@@ -19,7 +19,7 @@
             android:layout_alignParentStart="true"
             app:elevation="0dp"
             android:layout_below="@id/app_bar"
-            app:headerLayout="@layout/main_nav_header"
+            app:headerLayout="@layout/layout_nav_header_main"
             app:menu="@menu/main_nav_menu" />
 
         <View
@@ -51,7 +51,7 @@
             android:layout_below="@id/app_bar"
             android:layout_toEndOf="@id/nav_view"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/main_nav_graph" />
+            app:navGraph="@navigation/nav_graph_main" />
 
     </RelativeLayout>
 

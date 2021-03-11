@@ -1,0 +1,20 @@
+London,2643743
+New York City,5128581
+Paris,5603240
+Moscow,524894
+Tokyo,1850147
+Dubai,292223
+Singapore,1880252
+Barcelona,3128760
+Los Angeles,5368361
+Madrid,6359304
+Rome,3169070
+Chicago,3582383
+Toronto,5174095
+San Francisco,5391959
+Abu Dhabi,292968
+St. Petersburg,4171563
+Amsterdam,5107152
+Berlin,5245497
+Prague,3067696
+Mumbai,1275339

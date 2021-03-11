@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/known_cities"
-        android:name="com.mumayank.howstheweather.main.knowncities.KnownCitiesFragment"
+        android:name="com.mumayank.howstheweather.main.famous_cities.FamousCitiesFragment"
         android:label="fragment_known_cities"
         tools:layout="@layout/fragment_known_cities">
         <action
