@@ -1,21 +1,22 @@
 package com.mumayank.howstheweather.network
 
-import com.mumayank.howstheweather.main.bookmarks.data.SingleDayForecastResponse
+import com.mumayank.howstheweather.main.details.data.MultiDayForecast
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RestApiService {
-    @GET("/data/2.5/weather")
+    /*@GET("/data/2.5/weather")
     suspend fun getTodaysForecast(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("units") units: String
-    ): Response<SingleDayForecastResponse>
+    ): Response<SingleDayForecastResponse>*/
 
-    /*@GET("/data/2.5/forecast")
+    @GET("/data/2.5/forecast")
     suspend fun getMutidayForecast(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double
-    ): Response<MultiDayForecastResponse>*/
+        @Query("lon") longitude: Double,
+        @Query("units") units: String
+    ): Response<MultiDayForecast>
 }
