@@ -5,12 +5,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
+import com.google.gson.Gson
 import com.mumayank.howstheweather.main.details.data.Lists
 import com.mumayank.howstheweather.main.details.data.MultiDayForecast
-import com.mumayank.howstheweather.network.RestApiService
-import com.mumayank.howstheweather.network.RetrofitFactory
+import com.mumayank.howstheweather.network.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -33,30 +37,46 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
     }
 
     val isInProgress = MutableLiveData<Boolean>(true)
+    val hasErrorOccurred = MutableLiveData<Boolean>(false)
 
     fun getData(latitude: Double, longitude: Double) {
         if (multiDayForecast.value != null) {
             return
         }
-        isInProgress.postValue(true)
-        viewModelScope.launch(Dispatchers.IO) {
-            val apiInterface = RetrofitFactory.getClient().create(RestApiService::class.java)
-            val result = apiInterface.getMutidayForecast(latitude, longitude, getUnit(getApplication()))
-            val response = result.body()!!
-            filterData(response)
-        }
+        getData(NetworkUrls.getMultiDayForecast(latitude, longitude, getUnit(getApplication())))
     }
 
     fun getData(cityId: Long) {
         if (multiDayForecast.value != null) {
             return
         }
-        isInProgress.postValue(true)
+        getData(NetworkUrls.getMultiDayForecast(cityId, getUnit(getApplication())))
+    }
+
+    private fun getData(url: String) {
+        NetworkHelper.makeApiCall(
+            getApplication(),
+            url,
+            object : NetworkCallback {
+                override fun onFailure() {
+                    hasErrorOccurred.postValue(true)
+                }
+
+                override fun onSuccess(responseBody: ResponseBody?) {
+                    if (responseBody == null) {
+                        hasErrorOccurred.postValue(true)
+                    } else {
+                        isInProgress.postValue(true)
+                        processResponse(responseBody.string())
+                    }
+                }
+            })
+    }
+
+    private fun processResponse(string: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val apiInterface = RetrofitFactory.getClient().create(RestApiService::class.java)
-            val result = apiInterface.getMutidayForecastWithId(cityId, getUnit(getApplication()))
-            val response = result.body()!!
-            filterData(response)
+            val multiDayForecast = Gson().fromJson(string, MultiDayForecast::class.java)
+            filterData(multiDayForecast)
         }
     }
 

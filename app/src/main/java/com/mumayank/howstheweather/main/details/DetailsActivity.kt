@@ -3,11 +3,13 @@ package com.mumayank.howstheweather.main.details
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mumayank.howstheweather.R
 import com.mumayank.howstheweather.databinding.ActivityDetailsBinding
 
 class DetailsActivity : AppCompatActivity() {
@@ -30,16 +32,6 @@ class DetailsActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val lat = intent.getDoubleExtra(IE_CITY_LAT, -1.0)
-        val lon = intent.getDoubleExtra(IE_CITY_LON, -1.0)
-        val id = intent.getLongExtra(IE_CITY_ID, -1L)
-
-        if (id != -1L) {
-            viewModel.getData(id)
-        } else {
-            viewModel.getData(lat, lon)
-        }
-
         viewModel.multiDayForecast.observe(this) {
             if (it == null) {
                 return@observe
@@ -53,6 +45,22 @@ class DetailsActivity : AppCompatActivity() {
         viewModel.isInProgress.observe(this) {
             binding.progressViewLayout.progressLayout.visibility =
                 if (it) View.VISIBLE else View.GONE
+        }
+        viewModel.hasErrorOccurred.postValue(false)
+        viewModel.hasErrorOccurred.observe(this) {
+            if (it) {
+                finish()
+            }
+        }
+
+        val lat = intent.getDoubleExtra(IE_CITY_LAT, -1.0)
+        val lon = intent.getDoubleExtra(IE_CITY_LON, -1.0)
+        val id = intent.getLongExtra(IE_CITY_ID, -1L)
+
+        if (id != -1L) {
+            viewModel.getData(id)
+        } else {
+            viewModel.getData(lat, lon)
         }
     }
 

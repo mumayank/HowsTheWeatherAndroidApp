@@ -28,4 +28,5 @@
     <string name="google_play_services_issue">Google Play Services Issue</string>
     <string name="google_play_service_issue_detail">This app depends on Google Maps to show maps. Google Maps requires Google Play Services. Unfortunately, there is some issue with the said services present on this phone. Please either install or update the said services or try again from another phone. Really sorry for the inconvenience!</string>
     <string name="exit">EXIT</string>
+    <string name="no_network">Please check your network and try again later</string>
 </resources>
