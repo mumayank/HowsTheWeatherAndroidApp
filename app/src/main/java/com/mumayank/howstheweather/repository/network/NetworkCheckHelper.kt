@@ -1,4 +1,4 @@
-package com.mumayank.howstheweather.network
+package com.mumayank.howstheweather.repository.network
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -1,15 +1,16 @@
-package com.mumayank.howstheweather.db
+package com.mumayank.howstheweather.repository.db
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 
 object Db {
     private lateinit var db: AppDatabase
 
-    fun getDb(applicationContext: Application): AppDatabase {
+    fun getDb(context: Context): AppDatabase {
         if (this::db.isInitialized.not()) {
             db = Room.databaseBuilder(
-                applicationContext,
+                context,
                 AppDatabase::class.java, "database-name"
             ).build()
         }

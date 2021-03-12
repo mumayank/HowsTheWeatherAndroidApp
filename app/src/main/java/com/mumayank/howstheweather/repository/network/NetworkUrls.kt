@@ -1,4 +1,4 @@
-package com.mumayank.howstheweather.network
+package com.mumayank.howstheweather.repository.network
 
 object NetworkUrls {
     private const val BASE_URL = "https://api.openweathermap.org"

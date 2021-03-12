@@ -1,4 +1,4 @@
-package com.mumayank.howstheweather.network
+package com.mumayank.howstheweather.repository.network
 
 import okhttp3.ResponseBody
 import retrofit2.Call
