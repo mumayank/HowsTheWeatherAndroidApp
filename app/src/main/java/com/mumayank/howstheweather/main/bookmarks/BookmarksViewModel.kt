@@ -2,20 +2,19 @@ package com.mumayank.howstheweather.main.bookmarks
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.mumayank.howstheweather.db.City
-import com.mumayank.howstheweather.db.Db
+import com.mumayank.howstheweather.repository.db.Bookmark
+import com.mumayank.howstheweather.repository.repos.bookmark.BookmarkRepositoryFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class BookmarksViewModel(application: Application) : AndroidViewModel(application) {
 
-    var cities = Db.getDb(application).cityDao().getAll().asLiveData()
+    var bookmarks = BookmarkRepositoryFactory.get().getAll(application)
 
-    fun removeBookmarkedCity(city: City) {
+    fun removeBookmark(bookmark: Bookmark) {
         viewModelScope.launch(Dispatchers.IO) {
-            Db.getDb(getApplication()).cityDao().delete(city)
+            BookmarkRepositoryFactory.get().delete(getApplication(), bookmark)
         }
     }
 }

@@ -36,7 +36,7 @@ class DetailsActivity : AppCompatActivity() {
             if (it == null) {
                 return@observe
             }
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplication())
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
             val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
             binding.recyclerView.layoutManager =
                 LinearLayoutManager(this, RecyclerView.VERTICAL, false)
@@ -49,6 +49,7 @@ class DetailsActivity : AppCompatActivity() {
         viewModel.hasErrorOccurred.postValue(false)
         viewModel.hasErrorOccurred.observe(this) {
             if (it) {
+                Toast.makeText(this, getString(R.string.no_network), Toast.LENGTH_SHORT).show()
                 finish()
             }
         }

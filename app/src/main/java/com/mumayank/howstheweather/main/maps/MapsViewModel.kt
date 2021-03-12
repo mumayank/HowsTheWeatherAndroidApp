@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
-import com.mumayank.howstheweather.db.City
-import com.mumayank.howstheweather.db.Db
+import com.mumayank.howstheweather.repository.db.Bookmark
+import com.mumayank.howstheweather.repository.repos.bookmark.BookmarkRepositoryFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -45,7 +45,7 @@ class MapsViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private suspend fun setCityNameSearchSuccessResult(cityName: String, latLng: LatLng) {
+    private fun setCityNameSearchSuccessResult(cityName: String, latLng: LatLng) {
         viewModelScope.launch(Dispatchers.Main) {
             currentMapCity.postValue(MapCity(cityName, latLng))
             isInProgress.postValue(false)
@@ -54,8 +54,8 @@ class MapsViewModel(application: Application) : AndroidViewModel(application) {
 
     fun bookmarkCity() {
         viewModelScope.launch(Dispatchers.IO) {
-            Db.getDb(getApplication()).cityDao().insertAll(
-                City(
+            BookmarkRepositoryFactory.get().insert(
+                getApplication(), Bookmark(
                     currentMapCity.value!!.name,
                     currentMapCity.value!!.latLng.latitude,
                     currentMapCity.value!!.latLng.longitude

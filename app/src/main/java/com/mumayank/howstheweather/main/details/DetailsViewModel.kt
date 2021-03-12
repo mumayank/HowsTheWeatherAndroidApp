@@ -1,6 +1,7 @@
 package com.mumayank.howstheweather.main.details
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,19 +9,17 @@ import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import com.mumayank.howstheweather.main.details.data.Lists
 import com.mumayank.howstheweather.main.details.data.MultiDayForecast
-import com.mumayank.howstheweather.network.*
+import com.mumayank.howstheweather.repository.network.*
+import com.mumayank.howstheweather.repository.repos.forecast.ForecastRepositoryFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DetailsViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object {
-        fun getUnit(application: Application): String {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
+        fun getUnit(context: Context): String {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
             return if (isMetricUnitSystem) {
                 "metric"
@@ -43,39 +42,28 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
         if (multiDayForecast.value != null) {
             return
         }
-        getData(NetworkUrls.getMultiDayForecast(latitude, longitude, getUnit(getApplication())))
+        viewModelScope.launch(Dispatchers.IO) {
+            val multiDayForecast = ForecastRepositoryFactory.get().getMultiDayForecast(getApplication(), latitude, longitude, getUnit(getApplication()))
+            processData(multiDayForecast)
+        }
     }
 
     fun getData(cityId: Long) {
         if (multiDayForecast.value != null) {
             return
         }
-        getData(NetworkUrls.getMultiDayForecast(cityId, getUnit(getApplication())))
-    }
-
-    private fun getData(url: String) {
-        NetworkHelper.makeApiCall(
-            getApplication(),
-            url,
-            object : NetworkCallback {
-                override fun onFailure() {
-                    hasErrorOccurred.postValue(true)
-                }
-
-                override fun onSuccess(responseBody: ResponseBody?) {
-                    if (responseBody == null) {
-                        hasErrorOccurred.postValue(true)
-                    } else {
-                        isInProgress.postValue(true)
-                        processResponse(responseBody.string())
-                    }
-                }
-            })
-    }
-
-    private fun processResponse(string: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val multiDayForecast = Gson().fromJson(string, MultiDayForecast::class.java)
+            val multiDayForecast = ForecastRepositoryFactory.get().getMultiDayForecast(getApplication(), cityId, getUnit(getApplication()))
+            processData(multiDayForecast)
+        }
+    }
+
+    private fun processData(multiDayForecast: MultiDayForecast?) {
+        if (multiDayForecast == null) {
+            viewModelScope.launch(Dispatchers.Main) {
+                hasErrorOccurred.postValue(true)
+            }
+        } else {
             filterData(multiDayForecast)
         }
     }

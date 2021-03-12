@@ -8,32 +8,32 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mumayank.howstheweather.R
-import com.mumayank.howstheweather.db.City
+import com.mumayank.howstheweather.repository.db.Bookmark
 
 class RvAdapter(
-    private val cities: List<City>,
-    private val onClick: ((city: City) -> Unit)?,
-    private val onRemove: ((city: City) -> Unit)?
+    private val bookmarks: List<Bookmark>,
+    private val onClick: ((bookmark: Bookmark) -> Unit)?,
+    private val onRemove: ((bookmark: Bookmark) -> Unit)?
 ) :
     RecyclerView.Adapter<RvAdapter.ViewHolder>() {
 
     class ViewHolder(
         itemView: View,
-        private val onClick: ((city: City) -> Unit)?,
-        private val onRemove: ((city: City) -> Unit)?
+        private val onClick: ((bookmark: Bookmark) -> Unit)?,
+        private val onRemove: ((bookmark: Bookmark) -> Unit)?
     ) : RecyclerView.ViewHolder(itemView) {
-        fun bindItems(city: City) {
+        fun bindItems(bookmark: Bookmark) {
             val imageViewRemoveItem =
                 itemView.findViewById(R.id.image_view_remove_item) as ImageView
             val clickableLayout = itemView.findViewById(R.id.clickable_layout) as LinearLayout
             val textViewName = itemView.findViewById(R.id.text_view_name) as TextView
             imageViewRemoveItem.setOnClickListener {
-                onRemove?.invoke(city)
+                onRemove?.invoke(bookmark)
             }
             clickableLayout.setOnClickListener {
-                onClick?.invoke(city)
+                onClick?.invoke(bookmark)
             }
-            textViewName.text = city.name
+            textViewName.text = bookmark.cityName
         }
     }
 
@@ -44,10 +44,10 @@ class RvAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(cities[position])
+        holder.bindItems(bookmarks[position])
     }
 
     override fun getItemCount(): Int {
-        return cities.size
+        return bookmarks.size
     }
 }
