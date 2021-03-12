@@ -38,7 +38,7 @@ class MapsViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private suspend fun setCityNameSearchFailedResult() {
+    private fun setCityNameSearchFailedResult() {
         viewModelScope.launch(Dispatchers.Main) {
             currentMapCity.postValue(null)
             isInProgress.postValue(false)

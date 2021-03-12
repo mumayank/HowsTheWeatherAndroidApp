@@ -31,9 +31,8 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
     val multiDayForecast: MutableLiveData<MultiDayForecast> by lazy {
         MutableLiveData<MultiDayForecast>(null)
     }
-
-    val isInProgress = MutableLiveData<Boolean>(true)
-    val hasErrorOccurred = MutableLiveData<Boolean>(false)
+    val isInProgress = MutableLiveData(true)
+    val hasErrorOccurred = MutableLiveData(false)
 
     fun getData(latitude: Double, longitude: Double) {
         if (multiDayForecast.value != null) {

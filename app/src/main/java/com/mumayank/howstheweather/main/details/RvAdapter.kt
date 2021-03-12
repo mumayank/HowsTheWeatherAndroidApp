@@ -60,13 +60,13 @@ class RvAdapter(private val lists: List<Lists>, private val isMetricUnitSystem: 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_rv_item_details, parent, false)
-        return RvAdapter.ViewHolder(v, isMetricUnitSystem)
+        return ViewHolder(v, isMetricUnitSystem)
     }
 
-    override fun onBindViewHolder(holder: RvAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(lists[position])
     }
 
