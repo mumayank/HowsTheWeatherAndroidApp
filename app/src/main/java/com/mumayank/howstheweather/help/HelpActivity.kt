@@ -17,8 +17,8 @@ class HelpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHelpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
         binding.toolbar.title = getString(R.string.help)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {

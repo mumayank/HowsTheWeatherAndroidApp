@@ -3,13 +3,13 @@
     <PreferenceCategory>
 
         <SwitchPreferenceCompat
-            app:key="is_metric_unit_system"
+            app:key="unit"
             app:summaryOff="@string/metric_unit_system_off"
             app:summaryOn="@string/metric_unit_system_on"
             app:title="@string/metric_unit_system" />
 
         <Preference
-            app:key="resetBookmarks"
+            app:key="reset"
             app:title="@string/reset_bookmarks" />
 
     </PreferenceCategory>

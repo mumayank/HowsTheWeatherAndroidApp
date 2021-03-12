@@ -1,5 +1,6 @@
 package com.mumayank.howstheweather.main.details
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -19,6 +20,16 @@ class DetailsActivity : AppCompatActivity() {
         const val IE_CITY_LON = "IE_CITY_LON"
         const val IE_CITY_NAME = "IE_CITY_NAME"
         const val IE_CITY_ID = "IE_CITY_ID"
+
+        fun getUnit(activity: Activity): String {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+            val isMetricUnitSystem = sharedPreferences.getBoolean("unit", true)
+            return if (isMetricUnitSystem) {
+                "metric"
+            } else {
+                "imperial"
+            }
+        }
     }
 
     private lateinit var binding: ActivityDetailsBinding
@@ -37,7 +48,7 @@ class DetailsActivity : AppCompatActivity() {
                 return@observe
             }
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
-            val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
+            val isMetricUnitSystem = sharedPreferences.getBoolean("unit", true)
             binding.recyclerView.layoutManager =
                 LinearLayoutManager(this, RecyclerView.VERTICAL, false)
             binding.recyclerView.adapter = RvAdapter(it.list, isMetricUnitSystem)
@@ -59,9 +70,9 @@ class DetailsActivity : AppCompatActivity() {
         val id = intent.getLongExtra(IE_CITY_ID, -1L)
 
         if (id != -1L) {
-            viewModel.getData(id)
+            viewModel.getData(id, getUnit(this))
         } else {
-            viewModel.getData(lat, lon)
+            viewModel.getData(lat, lon, getUnit(this))
         }
     }
 

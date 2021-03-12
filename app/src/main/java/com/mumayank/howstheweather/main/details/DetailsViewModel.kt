@@ -1,5 +1,6 @@
 package com.mumayank.howstheweather.main.details
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
@@ -15,16 +16,6 @@ import kotlinx.coroutines.launch
 class DetailsViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object {
-        fun getUnit(context: Context): String {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-            val isMetricUnitSystem = sharedPreferences.getBoolean("isMetricUnitSystem", true)
-            return if (isMetricUnitSystem) {
-                "metric"
-            } else {
-                "imperial"
-            }
-        }
-
         const val filterTimeEndWith = "00:00:00"
     }
 
@@ -34,7 +25,7 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
     val isInProgress = MutableLiveData(true)
     val hasErrorOccurred = MutableLiveData(false)
 
-    fun getData(latitude: Double, longitude: Double) {
+    fun getData(latitude: Double, longitude: Double, unit: String) {
         if (multiDayForecast.value != null) {
             return
         }
@@ -43,19 +34,19 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
                 getApplication(),
                 latitude,
                 longitude,
-                getUnit(getApplication())
+                unit
             )
             processData(multiDayForecast)
         }
     }
 
-    fun getData(cityId: Long) {
+    fun getData(cityId: Long, unit: String) {
         if (multiDayForecast.value != null) {
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
             val multiDayForecast = ForecastRepositoryFactory.get()
-                .getMultiDayForecast(getApplication(), cityId, getUnit(getApplication()))
+                .getMultiDayForecast(getApplication(), cityId, unit)
             processData(multiDayForecast)
         }
     }
