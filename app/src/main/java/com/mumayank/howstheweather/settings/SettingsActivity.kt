@@ -42,7 +42,11 @@ class SettingsActivity : AppCompatActivity() {
             resetBookmarksPreference?.setOnPreferenceClickListener {
                 val viewModel: SettingsViewModel by viewModels()
                 viewModel.resetPrefs()
-                Toast.makeText(this.context, getString(R.string.bookmarks_are_reset), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this.context,
+                    getString(R.string.bookmarks_are_reset),
+                    Toast.LENGTH_SHORT
+                ).show()
                 true
             }
 

@@ -1,7 +1,6 @@
 package com.mumayank.howstheweather.repository.repos.forecast
 
 import android.content.Context
-import android.util.Log
 import com.google.gson.Gson
 import com.mumayank.howstheweather.main.details.data.MultiDayForecast
 import com.mumayank.howstheweather.repository.network.NetworkHelper

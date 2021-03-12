@@ -6,14 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
-import com.google.gson.Gson
 import com.mumayank.howstheweather.main.details.data.Lists
 import com.mumayank.howstheweather.main.details.data.MultiDayForecast
-import com.mumayank.howstheweather.repository.network.*
 import com.mumayank.howstheweather.repository.repos.forecast.ForecastRepositoryFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
 
 class DetailsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -43,7 +40,12 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
-            val multiDayForecast = ForecastRepositoryFactory.get().getMultiDayForecast(getApplication(), latitude, longitude, getUnit(getApplication()))
+            val multiDayForecast = ForecastRepositoryFactory.get().getMultiDayForecast(
+                getApplication(),
+                latitude,
+                longitude,
+                getUnit(getApplication())
+            )
             processData(multiDayForecast)
         }
     }
@@ -53,7 +55,8 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
             return
         }
         viewModelScope.launch(Dispatchers.IO) {
-            val multiDayForecast = ForecastRepositoryFactory.get().getMultiDayForecast(getApplication(), cityId, getUnit(getApplication()))
+            val multiDayForecast = ForecastRepositoryFactory.get()
+                .getMultiDayForecast(getApplication(), cityId, getUnit(getApplication()))
             processData(multiDayForecast)
         }
     }

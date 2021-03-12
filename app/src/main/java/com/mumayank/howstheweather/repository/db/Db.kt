@@ -1,6 +1,5 @@
 package com.mumayank.howstheweather.repository.db
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 

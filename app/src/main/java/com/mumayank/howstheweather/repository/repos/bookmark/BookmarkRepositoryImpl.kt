@@ -6,7 +6,7 @@ import androidx.lifecycle.asLiveData
 import com.mumayank.howstheweather.repository.db.Bookmark
 import com.mumayank.howstheweather.repository.db.Db
 
-class BookmarkRepositoryImpl: BookmarkRepository {
+class BookmarkRepositoryImpl : BookmarkRepository {
 
     override fun getAll(context: Context): LiveData<List<Bookmark>> {
         return Db.getDb(context).bookmarkDao().getAll().asLiveData()

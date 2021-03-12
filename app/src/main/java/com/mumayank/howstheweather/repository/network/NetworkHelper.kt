@@ -1,13 +1,10 @@
 package com.mumayank.howstheweather.repository.network
 
 import android.content.Context
-import android.widget.Toast
 import com.mumayank.howstheweather.BuildConfig
-import com.mumayank.howstheweather.R
 import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.suspendCoroutine
 
@@ -30,7 +27,10 @@ class NetworkHelper {
                     .client(
                         OkHttpClient.Builder()
                             .readTimeout(NetworkConstants.READ_TIMEOUT.toLong(), TimeUnit.SECONDS)
-                            .connectTimeout(NetworkConstants.CONNECT_TIMEOUT.toLong(), TimeUnit.SECONDS)
+                            .connectTimeout(
+                                NetworkConstants.CONNECT_TIMEOUT.toLong(),
+                                TimeUnit.SECONDS
+                            )
                             .addInterceptor {
                                 val original = it.request()
                                 val originalHttpUrl = original.url

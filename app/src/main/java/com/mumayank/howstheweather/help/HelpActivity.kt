@@ -8,7 +8,6 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.mumayank.howstheweather.R
 import com.mumayank.howstheweather.databinding.ActivityHelpBinding
-import com.mumayank.howstheweather.main.details.DetailsActivity
 
 class HelpActivity : AppCompatActivity() {
 
