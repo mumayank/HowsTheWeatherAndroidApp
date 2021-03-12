@@ -46,9 +46,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 }
                 line = reader.readLine()
             }
-            arrayList.sortedWith(compareBy { it.name })
+            val sortedList = arrayList.sortedWith(compareBy { it.name })
             viewModelScope.launch(Dispatchers.Main) {
-                famousCities.postValue(arrayList)
+                famousCities.postValue(sortedList)
                 isInProgress.postValue(false)
             }
         }

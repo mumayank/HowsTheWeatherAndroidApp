@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start|center"
                 android:text="@string/temperature"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/text_view_temperature"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end|center"
                 android:text="@string/humidity"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/text_view_humidity"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start|center"
                 android:text="@string/rain_chances"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/text_view_rain_chances"
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end|center"
                 android:text="@string/wind_information"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/text_view_wind_information"

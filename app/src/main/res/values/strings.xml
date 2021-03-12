@@ -21,7 +21,7 @@
     <string name="temperature">Temperature</string>
     <string name="humidity">Humidity</string>
     <string name="rain_chances">Rain chances</string>
-    <string name="wind_information">Wind information</string>
+    <string name="wind_information">Wind speed</string>
     <string name="city_bookmarked">City bookmarked!</string>
     <string name="could_not_detect_city">Could not detect a city in this region.\n(Hint: change zoom and try again)</string>
     <string name="bookmarks_are_reset">Bookmarks are reset</string>

@@ -23,26 +23,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        setupNavigationIfApplicable()
-        setupBottomNavigationIfApplicable()
+        setupAppropriateNavigation()
     }
 
-    private fun setupNavigationIfApplicable() {
-        if (binding.drawerLayout != null) {
-            val toggle = ActionBarDrawerToggle(
-                this, binding.drawerLayout, binding.toolbar,
-                R.string.app_name,
-                R.string.app_name
-            )
-            binding.drawerLayout!!.addDrawerListener(toggle)
-            toggle.syncState()
-            val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-            binding.navView!!.setupWithNavController(navHostFragment.navController)
-        }
-    }
-
-    private fun setupBottomNavigationIfApplicable() {
+    private fun setupAppropriateNavigation() {
         if (binding.bottomNavigationView != null) {
             val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -50,6 +34,19 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigationView!!,
                 navHostFragment.navController
             )
+        } else {
+            if (binding.drawerLayout != null) {
+                val toggle = ActionBarDrawerToggle(
+                    this, binding.drawerLayout, binding.toolbar,
+                    R.string.app_name,
+                    R.string.app_name
+                )
+                binding.drawerLayout!!.addDrawerListener(toggle)
+                toggle.syncState()
+            }
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            binding.navView!!.setupWithNavController(navHostFragment.navController)
         }
     }
 
