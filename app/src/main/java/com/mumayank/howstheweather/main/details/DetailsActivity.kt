@@ -23,7 +23,7 @@ class DetailsActivity : AppCompatActivity() {
 
         fun getUnit(activity: Activity): String {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
-            val isMetricUnitSystem = sharedPreferences.getBoolean("unit", true)
+            val isMetricUnitSystem = sharedPreferences.getBoolean("unit", false)
             return if (isMetricUnitSystem) {
                 "metric"
             } else {
@@ -48,7 +48,7 @@ class DetailsActivity : AppCompatActivity() {
                 return@observe
             }
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
-            val isMetricUnitSystem = sharedPreferences.getBoolean("unit", true)
+            val isMetricUnitSystem = sharedPreferences.getBoolean("unit", false)
             binding.recyclerView.layoutManager =
                 LinearLayoutManager(this, RecyclerView.VERTICAL, false)
             binding.recyclerView.adapter = RvAdapter(it.list, isMetricUnitSystem)
